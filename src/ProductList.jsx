@@ -309,6 +309,11 @@ function ProductList({ onHomeClick }) {
     dispatch(addItem(plant));
   };
 
+  const totalCartAmount = cart.reduce(
+    (prev, plant) => prev + plant.quantity,
+    0,
+  );
+
   return (
     <div>
       <div className="navbar" style={styleObj}>
@@ -357,6 +362,7 @@ function ProductList({ onHomeClick }) {
                     id="mainIconPathAttribute"
                   ></path>
                 </svg>
+                <span className="cart_quantity_count">{totalCartAmount}</span>
               </h1>
             </a>
           </div>
