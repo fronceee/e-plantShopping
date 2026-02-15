@@ -1,15 +1,26 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import "./ProductList.css";
 import CartItem from "./CartItem";
 import { addItem } from "./CartSlice";
 import { useDispatch } from "react-redux";
-import { useCallback } from "react";
+import { useSelector } from "react-redux";
+import { useMemo } from "react";
 function ProductList({ onHomeClick }) {
   const [showCart, setShowCart] = useState(false);
   const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-  const [addedToCart, setAddedToCart] = useState({});
 
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.items);
+
+  const plantNameInCarts = cart.map((cart) => cart.name);
+
+  const addedToCart = useMemo(() => {
+    const addedInCart = {};
+    for (const name of plantNameInCarts) {
+      addedInCart[name] = true;
+    }
+    return addedInCart;
+  }, [plantNameInCarts]);
 
   const plantsArray = [
     {
@@ -296,7 +307,6 @@ function ProductList({ onHomeClick }) {
 
   const handleAddToCart = (plant) => {
     dispatch(addItem(plant));
-    setAddedToCart((prev) => ({ ...prev, [plant.name]: true }));
   };
 
   return (
