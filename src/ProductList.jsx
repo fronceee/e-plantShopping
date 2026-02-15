@@ -3,7 +3,6 @@ import "./ProductList.css";
 import CartItem from "./CartItem";
 import { addItem } from "./CartSlice";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { useCallback } from "react";
 function ProductList({ onHomeClick }) {
   const [showCart, setShowCart] = useState(false);
@@ -375,8 +374,9 @@ function ProductList({ onHomeClick }) {
                       <button
                         className="product-button"
                         onClick={() => handleAddToCart(plant)}
+                        disabled={addedToCart[plant.name]}
                       >
-                        Add to Cart
+                        Add{addedToCart[plant.name] ? `ed` : null} to Cart
                       </button>
                     </div>
                   ))}
