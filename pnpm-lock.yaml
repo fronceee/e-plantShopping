@@ -43,7 +43,7 @@ importers:
         specifier: ^0.4.6
         version: 0.4.26(eslint@8.57.1)
       gh-pages:
-        specifier: ^6.1.1
+        specifier: ^6.3.0
         version: 6.3.0
       vite:
         specifier: ^5.2.0
